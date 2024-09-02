@@ -2,7 +2,7 @@
 
 ### Hello World출력하기
 
-### Compiles and hot-reloads for development
+### 웹 브라우저에서 보기 
 ```
 npm run serve
 ```
