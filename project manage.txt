@@ -1,0 +1,23 @@
+/Projects
+    /AProject
+        /src
+        /public
+        package.json
+        vue.config.js
+        ...
+    /BProject
+        /src
+        /public
+        package.json
+        vue.config.js
+        ...
+
+ A 프로젝트와 B 프로젝트를 구분해서 관리하고 싶다면, 
+ 프로젝트의 루트 디렉터리에서 각각의 프로젝트 폴더를 생성하여 독립적으로 관리할 수 있습니다.
+ 각 폴더(AProject, BProject) 내에서 별도의 Vue 프로젝트를 설정하면 됩니다. 
+ 이렇게 하면 A와 B 프로젝트는 서로 독립적으로 관리되며, 
+ 각 프로젝트의 설정, 종속성, 소스 코드 등을 분리하여 관리할 수 있습니다.
+
+예를 들어, vue create AProject 명령어로 A 프로젝트를 생성하고, 
+동일한 방식으로 B 프로젝트를 생성하면 됩니다. 
+이후 각 프로젝트 폴더 안에서 npm run serve 명령어를 통해 개별적으로 개발 서버를 실행할 수 있습니다.
