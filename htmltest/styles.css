@@ -1,0 +1,69 @@
+/* 전체 문서에 기본 폰트, 배경색 지정 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: whitesmoke;
+    color: black;
+    margin: 0;      /* 여백 */
+    padding: 0;
+    text-align: center;
+}
+
+/* 헤더 */
+header {
+    background-color: darkorange;
+    color: white;
+    padding: 20px;
+}
+
+/* 메인 */
+#main-title {
+    margin: 0;
+}
+.content {
+    padding: 20px;
+}
+
+/* 이미지 조절 */
+#sample-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* form */
+#sample-form {
+    display: inline-block;      /*콘텐츠가 중앙에 위치하도록 해줌*/
+    text-align: left;
+}
+
+/* 입력 필드 */
+.input-field {
+    display: block;     /*입력 필드가 새 줄에 위치 */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* button */
+#submit-button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 버튼에 마우스 액션 */
+#submit-button:hover {
+    background-color: red;
+}
+
+footer {
+    background-color: azure;
+    color: blueviolet;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
