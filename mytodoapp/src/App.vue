@@ -42,5 +42,38 @@
 </script>
 
 <style>
-/* */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  h1 {
+    color: #333;
+  }
+  input {
+    padding: 10px;
+    font-size: 17px;
+    width: 300px;
+    margin-right: 10px;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 17px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    background-color: white;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
 </style>
