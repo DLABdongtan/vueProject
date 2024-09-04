@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 //TodoItem 가져오기 
   import TodoItem from './components/TodoItem.vue';
 
@@ -31,26 +32,39 @@
       };
     },
     created() {
-      const savedTodos = localStorage.getItem('todos');
-      if(savedTodos) {
-        this.todos = JSON.parse(savedTodos);
-      }
+      this.getTodos();
     },
     methods: {
-      addTodo() {
-        if(this.newTodo.trim !== '') {
-          this.todos.push({ id: Date.now(), text: this.newTodo, completed: false });
-          this.newTodo = '';      //입력하고 나서, 필드 초기화 
-          localStorage.setItem('todos', JSON.stringify(this.todos));
+      async getTodos() {
+        try {
+          const response = await axios.get("http://localhost:3000/todos");
+          this.todos = reponse.data;
+        }
+        catch(error) {
+          console.error('오류발생:',error);
         }
       },
-      toggleComplete(todoId) {
+      async addTodo() {
+        if(this.newTodo.trim !== '') {
+          try {
+            const response = await axios.post('http://localhost:3000/todos', { text:this.newTodo });
+            this.todos.push(response.data);
+            this.newTodo = '';      //입력하고 나서, 필드 초기화 
+          }
+          catch(error){
+            console.error('목록 추가 오류:',error);
+          }
+        }
+      },
+      async toggleComplete(todoId) {
         const todo = this.todos.find(todo => todo.id === todoId);
         if(todo) {
-          todo.completed = !todo.completed;
-          localStorage.setItem('todos', JSON.stringify(this.todos));
-          if(todo.completed){
-            alert("완료했습니다.");
+          try {
+            todo.completed = !todo.completed;
+            await axios.put('http://localhost:3000/todos/${todoId}', { completed: todo.completed });
+          }
+          catch(error) {
+            console.error('상태 변경중 에러발생:',error);
           }
         }
       }
