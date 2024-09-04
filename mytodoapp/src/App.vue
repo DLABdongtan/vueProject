@@ -30,17 +30,25 @@
         todos: []       //할 일 목록을 저장하는 배열 
       };
     },
+    created() {
+      const savedTodos = localStorage.getItem('todos');
+      if(savedTodos) {
+        this.todos = JSON.parse(savedTodos);
+      }
+    },
     methods: {
       addTodo() {
         if(this.newTodo.trim !== '') {
           this.todos.push({ id: Date.now(), text: this.newTodo, completed: false });
           this.newTodo = '';      //입력하고 나서, 필드 초기화 
+          localStorage.setItem('todos', JSON.stringify(this.todos));
         }
       },
       toggleComplete(todoId) {
         const todo = this.todos.find(todo => todo.id === todoId);
         if(todo) {
           todo.completed = !todo.completed;
+          localStorage.setItem('todos', JSON.stringify(this.todos));
           if(todo.completed){
             alert("완료했습니다.");
           }
