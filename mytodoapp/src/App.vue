@@ -11,7 +11,7 @@
     <!-- todo list를 화면에 렌더링 -->
      <!-- v-for 디렉티브를 사용해서 todos배열을 순회하며 목록을 표시함 -->
     <ul>
-      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo"/>
+      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" @toggle-complete="toggleComplete"/>
     </ul>
   </div>
 </template>
@@ -26,18 +26,27 @@
     },
     data() {
       return {
-        newTodo: '',
-        todos: []
+        newTodo: '',    //새로운 할 일을 입력받을 문자열 변수 
+        todos: []       //할 일 목록을 저장하는 배열 
       };
     },
     methods: {
       addTodo() {
         if(this.newTodo.trim !== '') {
-          this.todos.push({ id: Date.now(), text: this.newTodo });
+          this.todos.push({ id: Date.now(), text: this.newTodo, completed: false });
           this.newTodo = '';      //입력하고 나서, 필드 초기화 
         }
+      },
+      toggleComplete(todoId) {
+        const todo = this.todos.find(todo => todo.id === todoId);
+        if(todo) {
+          todo.completed = !todo.completed;
+          if(todo.completed){
+            alert("완료했습니다.");
+          }
+        }
       }
-    }
+     }
   };
 </script>
 
@@ -70,10 +79,10 @@
     list-style-type: none;
     padding: 0;
   }
-  li {
+  /* li {
     background-color: white;
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ddd;
-  }
+  } */
 </style>

@@ -1,5 +1,7 @@
 <template>
-    <li>{{ todo.text }}</li>
+    <li @click="toggleComplete" :class="{ completed: todo.completed }">
+        {{ todo.text }}
+    </li>
 </template>
 
 <script>
@@ -9,6 +11,12 @@
             todo: {
                 type: Object,
                 required: true
+            }
+        },
+        methods: {
+            toggleComplete() {
+                //this.$emit()
+                this.$emit('toggle-complete', this.todo.id);
             }
         }
     };
@@ -20,5 +28,10 @@
         margin: 10px 0;
         padding: 10px;
         border: 1px solid #ddd;
+        cursor: pointer;
+    }
+    .completed {
+        text-decoration: line-through;
+        color: gray;
     }
 </style>
