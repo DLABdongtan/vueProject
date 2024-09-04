@@ -38,7 +38,7 @@ import axios from 'axios';
       async getTodos() {
         try {
           const response = await axios.get("http://localhost:3000/todos");
-          this.todos = reponse.data;
+          this.todos = response.data;
         }
         catch(error) {
           console.error('오류발생:',error);
