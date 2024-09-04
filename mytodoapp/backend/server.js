@@ -29,7 +29,8 @@ app.get('/todos', (req, res) => {
   const sql = 'SELECT * FROM todos';
   db.query(sql, (err, result) => {
     if (err) {
-      res.status(500).send(err);
+      console.error('MySQL에서 할 일 목록 가져오는 중 오류 발생:', err);
+      res.status(500).send({ error: '할 일 목록을 가져오는 중 문제가 발생했습니다.' });
     } else {
       res.json(result);
     }
@@ -42,7 +43,8 @@ app.post('/todos', (req, res) => {
   const sql = 'INSERT INTO todos (text, completed) VALUES (?, ?)';
   db.query(sql, [text, false], (err, result) => {
     if (err) {
-      res.status(500).send(err);
+      console.error('MySQL에서 할 일 추가하는 중 오류 발생:', err);
+      res.status(500).send({ error: '할 일을 추가하는 중 문제가 발생했습니다.' });
     } else {
       res.json({ id: result.insertId, text, completed: false });
     }
@@ -53,11 +55,17 @@ app.post('/todos', (req, res) => {
 app.put('/todos/:id', (req, res) => {
   const { id } = req.params;
   const { completed } = req.body;
+
+  // 상태 변경 전 로그 출력
+  console.log(`받은 요청: ID = ${id}, Completed = ${completed}`);
+
   const sql = 'UPDATE todos SET completed = ? WHERE id = ?';
   db.query(sql, [completed, id], (err, result) => {
     if (err) {
-      res.status(500).send(err);
+      console.error('MySQL에서 상태 업데이트 중 오류 발생:', err); // 오류 로그 추가
+      res.status(500).send({ error: '상태를 업데이트하는 중 문제가 발생했습니다.' });
     } else {
+      console.log(`ID = ${id}, 완료 상태가 ${completed}로 업데이트되었습니다.`);
       res.json(result);
     }
   });
